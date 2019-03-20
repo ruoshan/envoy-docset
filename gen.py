@@ -41,6 +41,14 @@ def gen_index(filename):
         except:
             continue
 
+    for dl in soup.find_all("dl"):
+        try:
+            name = dl.dt.text
+            path = filename[len(docpath) + 1:] + "#" + dl.attrs["id"]
+            cur.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Option', path))
+        except:
+            continue
+
 
 target_files = list_all_target_files(os.path.join(docpath, V, "api-v2")) # only index v2 keywords
 for f in target_files:
