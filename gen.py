@@ -1,10 +1,10 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import os, re, sqlite3, sys, fnmatch
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 if len(sys.argv) != 2:
-    print "gen.py {version}"
+    print("gen.py {version}")
     sys.exit(1)
 else:
     V = sys.argv[1]
@@ -30,7 +30,7 @@ def list_all_target_files(dirname):
     return rv
 
 def gen_index(filename):
-    print "processing %s" % filename
+    print("processing %s" % filename)
     soup = BeautifulSoup(open(filename))
 
     for div in soup.find_all('div', {'class': "section"}):
@@ -50,7 +50,7 @@ def gen_index(filename):
             continue
 
 
-target_files = list_all_target_files(os.path.join(docpath, V, "api-v2")) # only index v2 keywords
+target_files = list_all_target_files(os.path.join(docpath, V, "api-v3")) # only index v3 keywords
 for f in target_files:
     gen_index(f)
 
